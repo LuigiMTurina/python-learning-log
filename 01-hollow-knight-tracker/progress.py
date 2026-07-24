@@ -19,17 +19,13 @@ def add_achievement(item, categ):
     my_achievements[item] = categ
     print(f"\nAchievement added!\n")
 
-def calc_current_percentage(categ):
-    global current_percentage
-    global left_percentage
-
+def calc_current_percentage(categ, current_per):
     if categ == "Skill":
-        current_percentage += 2
-        left_percentage -= 2
+        current_per += 2
+        return current_per
     else:
-        current_percentage += 1
-        left_percentage -= 1
-
+        current_per += 1
+        return current_per    
 
 print("-" * 70)
 print("-" * 70)
@@ -72,22 +68,26 @@ while option != 4:
                     boss = input("What boss was defeated?: ")
                     add_achievement(boss.capitalize(), conq)
                     left_bosses -= 1
-                    calc_current_percentage(conq)
+                    current_percentage = calc_current_percentage(conq, current_percentage)
+                    left_percentage = 100 - current_percentage
                 case "Charm":
                     charm = input("What charm was obtained?: ")
                     add_achievement(charm.capitalize(), conq)
                     left_charms -= 1
-                    calc_current_percentage(conq)
+                    current_percentage = calc_current_percentage(conq, current_percentage)
+                    left_percentage = 100 - current_percentage
                 case "Spell":
                     spell = input("What spell was discovered?: ")
                     add_achievement(spell.capitalize(), conq)
                     left_spells -= 1
-                    calc_current_percentage(conq)
+                    current_percentage = calc_current_percentage(conq, current_percentage)
+                    left_percentage = 100 - current_percentage
                 case "Skill":
                     skill = input("What skill was found?: ")
                     add_achievement(skill.capitalize(), conq)
                     left_skills -= 1
-                    calc_current_percentage(conq)
+                    current_percentage = calc_current_percentage(conq, current_percentage)
+                    left_percentage = 100 - current_percentage
 
         case 2:
             print("\nYour current achievements are:")
