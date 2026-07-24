@@ -1,120 +1,120 @@
-total_locais = 17
-locais_restantes = 17
+total_locals = 17
+left_locals = 17
 
-total_chefes = 17
-chefes_restantes = 17
+total_bosses = 17
+left_bosses = 17
 
-total_magias = 6
-magias_restantes = 6
+total_spells = 6
+left_spells = 6
 
-total_habilidades = 7
-habilidades_restantes = 7
+total_skills = 7
+left_skills = 7
 
-total_amuletos = 40
-amuletos_restantes = 40
+total_charms = 40
+left_charms = 40
 
-percentual_atual = 0
-percentual_restante = 100
+current_percentage = 0
+left_percentage = 100
 
-minhas_conquistas = {}
+my_achievements = {}
 
-def adicionar_conquista(item, tipo):
-    minhas_conquistas[item] = tipo
-    print(f"\nConquista adicionada!\n")
+def add_achievement(item, categ):
+    my_achievements[item] = categ
+    print(f"\nAchievement added!\n")
 
-def calcular_porcentagem_atual(tipo):
-    global percentual_atual
-    global percentual_restante
+def calc_current_percentage(categ):
+    global current_percentage
+    global left_percentage
 
-    if tipo == "Habilidade":
-        percentual_atual += 2
-        percentual_restante -= 2
+    if categ == "Skill":
+        current_percentage += 2
+        left_percentage -= 2
     else:
-        percentual_atual += 1
-        percentual_restante -= 1
+        current_percentage += 1
+        left_percentage -= 1
 
 
 print("-" * 70)
 print("-" * 70)
 print("PROGRESS-OMETER\n".center(60))
 print("""
-    Seja bem vindo ao progressometer, sua ferramenta preferida 
-            de analise de progresso em jogos
+     Welcome to the progressometer, your favorite tool 
+            of progress analysis in games
 
     \n""".center(60))
 print("-" * 70)
 print("-" * 70)
 print("\n")
 
-print("JOGO SELECIONADO ----> HOLLOW KNIGHT <----\n\n")
+print("GAME SELECTED ----> HOLLOW KNIGHT <----\n\n")
 
 option = 0
 
 while option != 4:
     print("-" * 70)
-    print("OPERACOES\n")
-    print("1 - Inserir nova conquista")
-    print("2 - Ver progresso atual")
-    print("3 - Progresso Restante")
-    print("4 - Sair\n")
+    print("OPERATIONS\n")
+    print("1 - Insert new achievement")
+    print("2 - Show actual progress")
+    print("3 - Left progress")
+    print("4 - Leave\n")
 
-    option = int(input("Qual operacao deseja realizar?: "))
+    option = int(input("What operation you want to perform?: "))
 
     match option:
         case 1:
-            print("\nCATEGORIAS DE CONQUISTA\n")
-            print(" --> Chefe")
+            print("\nACHIEVEMENT CATEGORIES\n")
+            print(" --> Boss")
             print(" --> Local")
-            print(" --> Amuleto")
-            print(" --> Magia")
-            print(" --> Habilidade\n")
-            conq = input("Qual tipo de conquista deseja adicionar?: ")
+            print(" --> Charm")
+            print(" --> Spell")
+            print(" --> Skill\n")
+            conq = input("What type of achievement do you want to add?: ")
             conq = conq.capitalize()
 
             match conq:
-                case "Chefe":
-                    chefe = input("Qual chefe foi derrotado?: ")
-                    adicionar_conquista(chefe.capitalize(), conq)
-                    chefes_restantes -= 1
-                    calcular_porcentagem_atual(conq)
+                case "Boss":
+                    boss = input("What boss was defeated?: ")
+                    add_achievement(boss.capitalize(), conq)
+                    left_bosses -= 1
+                    calc_current_percentage(conq)
                 case "Local":
-                    local = input("Qual local foi explorado?: ")
-                    adicionar_conquista(local.capitalize(), conq)
-                    locais_restantes -= 1
-                    calcular_porcentagem_atual(conq)
-                case "Amuleto":
-                    amuleto = input("Qual amuleto foi obtido?: ")
-                    adicionar_conquista(amuleto.capitalize(), conq)
-                    amuletos_restantes -= 1
-                    calcular_porcentagem_atual(conq)
-                case "Magia":
-                    magia = input("Qual magia foi descoberta?: ")
-                    adicionar_conquista(magia.capitalize(), conq)
-                    magias_restantes -= 1
-                    calcular_porcentagem_atual(conq)
-                case "Habilidade":
-                    hab = input("Qual habilidade foi encontrada?: ")
-                    adicionar_conquista(hab.capitalize(), conq)
-                    habilidades_restantes -= 1
-                    calcular_porcentagem_atual(conq)
+                    local = input("What local was explored?: ")
+                    add_achievement(local.capitalize(), conq)
+                    left_locals -= 1
+                    calc_current_percentage(conq)
+                case "Charm":
+                    charm = input("What charm was obtained?: ")
+                    add_achievement(charm.capitalize(), conq)
+                    left_charms -= 1
+                    calc_current_percentage(conq)
+                case "Spell":
+                    spell = input("What spell was discovered?: ")
+                    add_achievement(spell.capitalize(), conq)
+                    left_spells -= 1
+                    calc_current_percentage(conq)
+                case "Skill":
+                    skill = input("What skill was found?: ")
+                    add_achievement(skill.capitalize(), conq)
+                    left_skills -= 1
+                    calc_current_percentage(conq)
 
         case 2:
-            print("\nSuas conquistas atuais sao:")
-            for item, conq in minhas_conquistas.items():
+            print("\nYour current achievements are:")
+            for item, conq in my_achievements.items():
                 print(f" --> {item}, {conq}")
 
-            print(f"\nPercentual de conclusao: --> {percentual_atual}% <--\n")
+            print(f"\nConclusion percentage: --> {current_percentage}% <--\n")
 
         case 3: 
-            print(f"\nResta {percentual_restante}% para a conclusao do jogo")
+            print(f"\n{left_percentage}% remaining for the game conclusion")
             
-            print("\nConquistas restantes:")
-            print(f" --> {chefes_restantes} chefes")   
-            print(f" --> {locais_restantes} locais")   
-            print(f" --> {amuletos_restantes} amuletos")   
-            print(f" --> {habilidades_restantes} habilidades")   
-            print(f" --> {magias_restantes} magias\n")  
+            print("\nLeft achievements:")
+            print(f" --> {left_bosses} bosses")   
+            print(f" --> {left_locals} locals")   
+            print(f" --> {left_charms} charms")   
+            print(f" --> {left_skills} skills")   
+            print(f" --> {left_spells} spells\n")  
 
         case 4: 
-            print("\nBoa sorte na sua jornada!")
+            print("\nGood luck on your journey!")
             
