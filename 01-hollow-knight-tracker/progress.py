@@ -27,24 +27,25 @@ def calc_current_percentage(categ, current_per):
         current_per += 1
         return current_per    
 
-print("-" * 70)
-print("-" * 70)
-print("PROGRESS-OMETER\n".center(60))
-print("""
-     Welcome to the progressometer, your favorite tool 
-            of progress analysis in games
-
-    \n""".center(60))
-print("-" * 70)
-print("-" * 70)
+print("-" * 80)
+print("-" * 80)
+print("HOLLOW KNIGHT TRACKER\n".center(60))
+print(
+     """
+    Are you lost on Hollow Knight? Don't know how good you're going?
+    This tool is your answer! Here you can measure your progress quickly!
+    You just need to inform your achievements, and we'll make the math
+   \n""".center(60))
+print("-" * 80)
+print("-" * 80)
 print("\n")
 
-print("GAME SELECTED ----> HOLLOW KNIGHT <----\n\n")
+print("PRESS START ----> HOLLOW KNIGHT <----\n\n".center(60))
 
 option = 0
 
 while option != 4:
-    print("-" * 70)
+    print("-" * 80)
     print("OPERATIONS\n")
     print("1 - Insert new achievement")
     print("2 - Show actual progress")
