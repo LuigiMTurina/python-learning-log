@@ -1,6 +1,3 @@
-total_locals = 17
-left_locals = 17
-
 total_bosses = 17
 left_bosses = 17
 
@@ -64,7 +61,6 @@ while option != 4:
         case 1:
             print("\nACHIEVEMENT CATEGORIES\n")
             print(" --> Boss")
-            print(" --> Local")
             print(" --> Charm")
             print(" --> Spell")
             print(" --> Skill\n")
@@ -76,11 +72,6 @@ while option != 4:
                     boss = input("What boss was defeated?: ")
                     add_achievement(boss.capitalize(), conq)
                     left_bosses -= 1
-                    calc_current_percentage(conq)
-                case "Local":
-                    local = input("What local was explored?: ")
-                    add_achievement(local.capitalize(), conq)
-                    left_locals -= 1
                     calc_current_percentage(conq)
                 case "Charm":
                     charm = input("What charm was obtained?: ")
@@ -109,8 +100,7 @@ while option != 4:
             print(f"\n{left_percentage}% remaining for the game conclusion")
             
             print("\nLeft achievements:")
-            print(f" --> {left_bosses} bosses")   
-            print(f" --> {left_locals} locals")   
+            print(f" --> {left_bosses} bosses")      
             print(f" --> {left_charms} charms")   
             print(f" --> {left_skills} skills")   
             print(f" --> {left_spells} spells\n")  
