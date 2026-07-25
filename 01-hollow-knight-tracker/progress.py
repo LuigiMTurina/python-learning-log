@@ -1,21 +1,32 @@
 left_achievements = {
-    "Boss": 17,
+    "Boss": 14,
+    "Charm": 36,
     "Spell": 6,
     "Skill": 7,
-    "Charm": 40
+    "Dreamer": 3,
+    "Dream Nail": 3,
+    "Mask Shard": 4,
+    "Nail Art": 3,
+    "Nail Upgrade": 4,
+    "Colosseum": 3,
+    "Vessel Fragment": 3,
+    "Warrior Dream": 7
 }
 
 modify_input = {
-    "Boss": "What boss was defeated?",
+    "Boss": "What main boss was defeated?",
+    "Charm": "What charm was obtained?",
     "Spell": "What spell was discovered?",
-    "Skil": "What skill was found?",
-    "Charm": "What charm was obtained?"
+    "Skill": "What skill was found?",
+    "Dreamer": "How many Dreamers have you found?",
+    "Dream Nail": "In wich phase is your Dream Nail?",
+    "Mask Shard": "How many Mask upgrades have you got?",
+    "Nail Art": "How many Nail Arts have you unlocked?",
+    "Nail Upgrade": "On what stage is your Nail?",
+    "Colosseum": "How many levels of Colosseum of Fools you passed through?",
+    "Vessel Fragment": "How many Vessel upgrades have you got?",
+    "Warrior Dream": "How many Warrior Dreams have you defeated?"
 }
-
-total_bosses = 17
-total_spells = 6
-total_skills = 7
-total_charms = 40
 
 current_percentage = 0
 left_percentage = 100
@@ -67,24 +78,34 @@ while option != 4:
 
     match option:
         case 1:
-            print("\nACHIEVEMENT CATEGORIES\n")
+            print("-" * 80)
+            print("\nMAIN ACHIEVEMENT CATEGORIES\n")
             print(" --> Boss")
             print(" --> Charm")
             print(" --> Spell")
-            print(" --> Skill\n")
+            print(" --> Skill")
+            print(" --> Dreamer")
+            print(" --> Dream Nail")
+            print(" --> Mask Shard")
+            print(" --> Nail Art")
+            print(" --> Nail Upgrade")
+            print(" --> Colosseum")
+            print(" --> Vessel Fragment")
+            print(" --> Warrior Dream\n")
 
             achv = input("What type of achievement do you want to add?: ")
-            achv = achv.capitalize()
+            achv = achv.title()
 
             name = input(f"{modify_input[achv]}: ")
 
-            add_achievement(name.capitalize(), achv)
+            add_achievement(name.title(), achv)
             decrement_remaining(achv)
 
             current_percentage = calc_current_percentage(achv, current_percentage)
             left_percentage = 100 - current_percentage
 
         case 2:
+            print("-" * 80)
             print("\nYour current achievements are:")
             for item, achv in my_achievements.items():
                 print(f" --> {item}, {achv}")
@@ -92,7 +113,8 @@ while option != 4:
             print(f"\nConclusion percentage: --> {current_percentage}% <--\n")
 
         case 3: 
-            print(f"\n{left_percentage}% remaining for the game conclusion")
+            print("-" * 80)
+            print(f"\nRemaining for the game conclusion --> {left_percentage}% <-- ")
             
             print("\nLeft achievements:")
             for key, value in left_achievements.items():
