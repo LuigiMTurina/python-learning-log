@@ -1,14 +1,21 @@
+left_achievements = {
+    "Boss": 17,
+    "Spell": 6,
+    "Skill": 7,
+    "Charm": 40
+}
+
+modify_input = {
+    "Boss": "What boss was defeated?",
+    "Spell": "What spell was discovered?",
+    "Skil": "What skill was found?",
+    "Charm": "What charm was obtained?"
+}
+
 total_bosses = 17
-left_bosses = 17
-
 total_spells = 6
-left_spells = 6
-
 total_skills = 7
-left_skills = 7
-
 total_charms = 40
-left_charms = 40
 
 current_percentage = 0
 left_percentage = 100
@@ -18,6 +25,10 @@ my_achievements = {}
 def add_achievement(item, categ):
     my_achievements[item] = categ
     print(f"\nAchievement added!\n")
+
+
+def decrement_remaining(achv):
+    left_achievements[achv] -= 1
 
 def calc_current_percentage(categ, current_per):
     if categ == "Skill":
@@ -61,39 +72,22 @@ while option != 4:
             print(" --> Charm")
             print(" --> Spell")
             print(" --> Skill\n")
-            conq = input("What type of achievement do you want to add?: ")
-            conq = conq.capitalize()
 
-            match conq:
-                case "Boss":
-                    boss = input("What boss was defeated?: ")
-                    add_achievement(boss.capitalize(), conq)
-                    left_bosses -= 1
-                    current_percentage = calc_current_percentage(conq, current_percentage)
-                    left_percentage = 100 - current_percentage
-                case "Charm":
-                    charm = input("What charm was obtained?: ")
-                    add_achievement(charm.capitalize(), conq)
-                    left_charms -= 1
-                    current_percentage = calc_current_percentage(conq, current_percentage)
-                    left_percentage = 100 - current_percentage
-                case "Spell":
-                    spell = input("What spell was discovered?: ")
-                    add_achievement(spell.capitalize(), conq)
-                    left_spells -= 1
-                    current_percentage = calc_current_percentage(conq, current_percentage)
-                    left_percentage = 100 - current_percentage
-                case "Skill":
-                    skill = input("What skill was found?: ")
-                    add_achievement(skill.capitalize(), conq)
-                    left_skills -= 1
-                    current_percentage = calc_current_percentage(conq, current_percentage)
-                    left_percentage = 100 - current_percentage
+            achv = input("What type of achievement do you want to add?: ")
+            achv = achv.capitalize()
+
+            name = input(f"{modify_input[achv]}: ")
+
+            add_achievement(name.capitalize(), achv)
+            decrement_remaining(achv)
+
+            current_percentage = calc_current_percentage(achv, current_percentage)
+            left_percentage = 100 - current_percentage
 
         case 2:
             print("\nYour current achievements are:")
-            for item, conq in my_achievements.items():
-                print(f" --> {item}, {conq}")
+            for item, achv in my_achievements.items():
+                print(f" --> {item}, {achv}")
 
             print(f"\nConclusion percentage: --> {current_percentage}% <--\n")
 
@@ -101,10 +95,8 @@ while option != 4:
             print(f"\n{left_percentage}% remaining for the game conclusion")
             
             print("\nLeft achievements:")
-            print(f" --> {left_bosses} bosses")      
-            print(f" --> {left_charms} charms")   
-            print(f" --> {left_skills} skills")   
-            print(f" --> {left_spells} spells\n")  
+            for key, value in left_achievements.items():
+                print(f" --> {key}: {value} left")  
 
         case 4: 
             print("\nGood luck on your journey!")
