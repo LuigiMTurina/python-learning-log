@@ -1,3 +1,5 @@
+
+
 left_achievements = {
     "Boss": 14,
     "Charm": 36,
@@ -34,12 +36,20 @@ left_percentage = 100
 my_achievements = {}
 
 def add_achievement(item, categ):
-    my_achievements[item] = categ
+    try:
+        int(item)
+        my_achievements[categ] = item
+    except ValueError:
+        my_achievements[item] = categ
+
     print(f"\nAchievement added!\n")
 
 
-def decrement_remaining(achv):
-    left_achievements[achv] -= 1
+def decrement_remaining(achv, cat_value):
+    if achv in my_achievements.values(): 
+        left_achievements[achv] -= 1
+    elif achv in my_achievements.keys():
+        left_achievements[achv] -= int(cat_value) 
 
 def calc_current_percentage(categ, current_per):
     if categ == "Skill":
@@ -74,7 +84,15 @@ while option != 4:
     print("3 - Left progress")
     print("4 - Leave\n")
 
-    option = int(input("What operation you want to perform?: "))
+    try:
+        option = int(input("What operation you want to perform?: "))
+
+        if option < 1 or option > 4:
+            raise ValueError("Invalid option! Enter a number between 1 and 4")
+    except ValueError as error:
+        print(f"\nError: {error}")
+        option = 0
+
 
     match option:
         case 1:
@@ -93,13 +111,26 @@ while option != 4:
             print(" --> Vessel Fragment")
             print(" --> Warrior Dream\n")
 
-            achv = input("What type of achievement do you want to add?: ")
-            achv = achv.title()
+            try:
+                achv = input("What type of achievement do you want to add?: ")
+                achv = achv.title()
 
-            name = input(f"{modify_input[achv]}: ")
+                if achv not in modify_input.keys():
+                    raise KeyError("Please, insert a valid category name")
+            except KeyError as error:
+                print(f"\nError: {error}\n")
+                achv = input("What type of achievement do you want to add?: ")
 
-            add_achievement(name.title(), achv)
-            decrement_remaining(achv)
+            finally:
+                if achv not in modify_input.keys():
+                    print("\nOperation cancelled due wrong inputs\n")
+                    continue
+
+
+            category_value = input(f"{modify_input[achv]}: ")
+
+            add_achievement(category_value.title(), achv)
+            decrement_remaining(achv, category_value)
 
             current_percentage = calc_current_percentage(achv, current_percentage)
             left_percentage = 100 - current_percentage
@@ -114,7 +145,7 @@ while option != 4:
 
         case 3: 
             print("-" * 80)
-            print(f"\nRemaining for the game conclusion --> {left_percentage}% <-- ")
+            print(f"\nRemaining for the game completion --> {left_percentage}% <-- ")
             
             print("\nLeft achievements:")
             for key, value in left_achievements.items():
