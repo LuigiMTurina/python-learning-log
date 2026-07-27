@@ -1,4 +1,13 @@
-
+total_quantitative_achievements = {
+    "Dreamer": 3,
+    "Dream Nail": 3,
+    "Mask Shard": 4,
+    "Nail Art": 3,
+    "Nail Upgrade": 4,
+    "Colosseum": 3,
+    "Vessel Fragment": 3,
+    "Warrior Dream": 7 
+}
 
 left_achievements = {
     "Boss": 14,
@@ -49,7 +58,7 @@ def decrement_remaining(achv, cat_value):
     if achv in my_achievements.values(): 
         left_achievements[achv] -= 1
     elif achv in my_achievements.keys():
-        left_achievements[achv] -= int(cat_value) 
+        left_achievements[achv] = (total_quantitative_achievements[achv] - int(cat_value)) 
 
 def calc_current_percentage(categ, current_per):
     if categ == "Skill":
@@ -152,5 +161,4 @@ while option != 4:
                 print(f" --> {key}: {value} left")  
 
         case 4: 
-            print("\nGood luck on your journey!")
-            
+            print("\nGood luck on your journey!")   
