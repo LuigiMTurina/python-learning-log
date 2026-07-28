@@ -1,11 +1,11 @@
 total_quantitative_achievements = {
     "Dreamer": 3,
     "Dream Nail": 3,
-    "Mask Shard": 4,
+    "Mask Shard": 16,
     "Nail Art": 3,
     "Nail Upgrade": 4,
     "Colosseum": 3,
-    "Vessel Fragment": 3,
+    "Vessel Fragment": 9,
     "Warrior Dream": 7 
 }
 
@@ -16,11 +16,11 @@ left_achievements = {
     "Skill": 7,
     "Dreamer": 3,
     "Dream Nail": 3,
-    "Mask Shard": 4,
+    "Mask Shard": 16,
     "Nail Art": 3,
     "Nail Upgrade": 4,
     "Colosseum": 3,
-    "Vessel Fragment": 3,
+    "Vessel Fragment": 9,
     "Warrior Dream": 7
 }
 
@@ -31,11 +31,11 @@ modify_input = {
     "Skill": "What skill was found?",
     "Dreamer": "How many Dreamers have you found?",
     "Dream Nail": "In wich phase is your Dream Nail?",
-    "Mask Shard": "How many Mask upgrades have you got?",
+    "Mask Shard": "How many Mask shards have you got?",
     "Nail Art": "How many Nail Arts have you unlocked?",
     "Nail Upgrade": "On what stage is your Nail?",
     "Colosseum": "How many levels of Colosseum of Fools you passed through?",
-    "Vessel Fragment": "How many Vessel upgrades have you got?",
+    "Vessel Fragment": "How many Vessel fragments have you got?",
     "Warrior Dream": "How many Warrior Dreams have you defeated?"
 }
 
@@ -46,7 +46,7 @@ my_achievements = {}
 
 def add_achievement(item, categ):
     try:
-        int(item)
+        item = int(item)
         my_achievements[categ] = item
     except ValueError:
         my_achievements[item] = categ
@@ -60,9 +60,29 @@ def decrement_remaining(achv, cat_value):
     elif achv in my_achievements.keys():
         left_achievements[achv] = (total_quantitative_achievements[achv] - int(cat_value)) 
 
+
+def shard_or_frag_percentage(categ): 
+    if categ == "Mask Shard":
+        if my_achievements[categ] % 4 == 0:
+            return 1
+        else:
+            return 0
+    else:
+        if my_achievements[categ] % 3 == 0:
+            return 1
+        else:
+            return 0
+       
+
 def calc_current_percentage(categ, current_per):
     if categ == "Skill":
         current_per += 2
+        return current_per
+    elif categ == "Mask Shard":
+        current_per += shard_or_frag_percentage(categ)
+        return current_per 
+    elif categ == "Vessel Fragment":
+        current_per += shard_or_frag_percentage(categ)
         return current_per
     else:
         current_per += 1
