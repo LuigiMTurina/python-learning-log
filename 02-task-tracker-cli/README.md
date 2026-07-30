@@ -30,14 +30,14 @@ All of the tasks are registred in a JSON file, that is saved on the same directo
 A ideia é que fosse um desafio particular para mim, para avaliar o meu nível de conhecimento na linguagem e o nível da minha capacidade lógica.
 Da mesma forma, o propósito do repositório é apresentar projetos feitos inteiramente sem a IA, portanto, eu a utilizei somente como material de consulta
 para estudar o funcionamento das funções e bibliotecas utilizadas, tendo escrito cada linha de código por conta própria
-- [Link do projeto proposto](https://roadmap.sh/projects/task-tracker)
+- Link do projeto proposto: (https://roadmap.sh/projects/task-tracker)
 
 **[EN]** The program was developed as a challenge suggested by Roadmap.sh, that can be found on the link below.
 
 The idea was that it be an particular challenge for me, to evaluate my language knowledge level and my logical capacities.
 On the same way, the proposite of the repo is present projects made entirely without AI, so I used it only as consult material
 to study the funtions operation and library used, writing each code line by my own
-- [Link of the project suggested](https://roadmap.sh/projects/task-tracker)
+- Link of the project suggested: (https://roadmap.sh/projects/task-tracker)
 
 ---
 # How to use it
