@@ -32,6 +32,19 @@ def update_lists(my_tasks, todo_list, progress_list, done_list):
 
     return my_tasks, todo_list, progress_list, done_list
 
+def indexes(my_tasks):
+    indexes = []
+    for task in my_tasks:
+        indexes.append(task["id"])
+    return indexes
+
+def get_index(id, indexes):
+    for idx in indexes:
+        if idx == id:
+            return indexes.index(idx)
+        else:
+           continue
+
 def add(task, now, my_tasks):
     if my_tasks == []:
         id = 1
@@ -47,12 +60,15 @@ def add(task, now, my_tasks):
     }
 
     my_tasks.append(new_task)
+    indexes(my_tasks)
 
     print(f"Task added successfully (ID: {id})")
 
+
 def update(id, description, my_tasks):
     try:
-        index = id - 1
+
+        index = get_index(id, indexes(my_tasks))
         my_tasks[index]["description"] = description
         print(f"Task updated sucessfully (ID: {id})")
     except IndexError:
@@ -67,9 +83,10 @@ def update(id, description, my_tasks):
 
 def delete(id, my_tasks):
     try:
-        index = id - 1
+        index = get_index(id, indexes(my_tasks))
         del my_tasks[index]
         print(f"Task deleted sucessfully (ID: {id})")
+        indexes(my_tasks)
     except IndexError:
         if not my_tasks == []:
             print("Non-existent ID")
