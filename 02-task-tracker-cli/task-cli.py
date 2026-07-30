@@ -71,6 +71,7 @@ def update(id, description, my_tasks):
         index = get_index(id, indexes(my_tasks))
         my_tasks[index]["description"] = description
         print(f"Task updated sucessfully (ID: {id})")
+        my_tasks[index]["updatedAt"] = str(now)
     except IndexError:
         if not my_tasks == []:
             print("Non-existent ID")
