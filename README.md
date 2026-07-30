@@ -15,8 +15,9 @@ One guiding principle here: projects are published as they are, bugs and imperfe
 
 | # | Projeto / Project | Status | Data / Date | Stack |
 |---|---|---|---|---|
-| 01 | [Hollow Knight Progress Tracker](./01-hollow-knight-tracker) | Functional "Dirtmouth" `v1.1` | Julho 2026 / July 2026 | Python |
-
+| 01 | [Hollow Knight Progress Tracker](./01-hollow-knight-tracker) | Functional "Dirtmouth" `v1.1` (paused) | Julho 2026 / July 2026 | Python |
+| 02 | [CLI Task Tracker](./02-task-tracler-cli) | MVP `v1.0` | Julho 2026 / July 2026 | Python |
+ 
 ---
 
 *Este README será atualizado a cada novo projeto adicionado. / This README will be updated as new projects are added.*
