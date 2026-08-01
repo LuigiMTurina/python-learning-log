@@ -44,6 +44,7 @@ def get_index(id, indexes):
             return indexes.index(idx)
         else:
            continue
+    return -99
 
 def add(task, now, my_tasks):
     if my_tasks == []:
@@ -81,6 +82,8 @@ def update(id, description, my_tasks):
                 add(description, now, my_tasks)
             else:
                 print("Failed to update")
+    except TypeError:
+        print("Error: enter a valid ID")
 
 def delete(id, my_tasks):
     try:
@@ -93,12 +96,14 @@ def delete(id, my_tasks):
             print("Non-existent ID")
         else:
             print("Empty tasks list")
+    except TypeError:
+            print("Error: enter a valid ID")
 
 def change_status(id, status, my_tasks):
     try:
         status = status[1:]
         new_status = "-".join(status)
-        index = id - 1
+        index = get_index(id, indexes(my_tasks))
         my_tasks[index]["status"] = new_status
         print(f"{new_status.title()}: {my_tasks[index]["description"]} (ID: {id})")
     except IndexError:
@@ -106,6 +111,8 @@ def change_status(id, status, my_tasks):
             print("Non-existent ID")
         else:
             print("Empty tasks list")
+    except TypeError:
+            print("Error: enter a valid ID")
 
 def _list(status, my_tasks, todo_list, progress_list, done_list):
     update_lists(my_tasks, todo_list, progress_list, done_list)
@@ -132,42 +139,45 @@ def _list(status, my_tasks, todo_list, progress_list, done_list):
 if len(sys.argv) > 1:
     command = sys.argv[1]
 
-    match command:
-        case "add":
-            task = sys.argv[2]
-            add(task, now, my_tasks)
-        case "update":
-            task_id = int(sys.argv[2])
-            description = sys.argv[3]
-            update(task_id, description, my_tasks)
-        case "delete":
-            task_id = int(sys.argv[2])
-            delete(task_id, my_tasks)
-        case "mark-in-progress":
-            task_id = int(sys.argv[2])
-            status = sys.argv[1].split("-")
-            change_status(task_id, status, my_tasks)
-        case "mark-done":
-            task_id = int(sys.argv[2])
-            status = sys.argv[1].split("-")
-            change_status(task_id, status, my_tasks)
-        case "list":    
-            try:
-                if sys.argv[2] == "done":
-                    status = sys.argv[2]
+    try:
+        match command:
+            case "add":
+                task = sys.argv[2]
+                add(task, now, my_tasks)
+            case "update":
+                task_id = int(sys.argv[2])
+                description = sys.argv[3]
+                update(task_id, description, my_tasks)
+            case "delete":
+                task_id = int(sys.argv[2])
+                delete(task_id, my_tasks)
+            case "mark-in-progress":
+                task_id = int(sys.argv[2])
+                status = sys.argv[1].split("-")
+                change_status(task_id, status, my_tasks)
+            case "mark-done":
+                task_id = int(sys.argv[2])
+                status = sys.argv[1].split("-")
+                change_status(task_id, status, my_tasks)
+            case "list":    
+                try:
+                    if sys.argv[2] == "done":
+                        status = sys.argv[2]
+                        _list(status, my_tasks, todo_list, progress_list, done_list)
+                    elif sys.argv[2] == "todo":
+                        status = sys.argv[2]
+                        _list(status, my_tasks, todo_list, progress_list, done_list)
+                    elif sys.argv[2] == "in-progress":
+                        status = sys.argv[2]
+                        _list(status, my_tasks, todo_list, progress_list, done_list)
+                except IndexError:
+                    status = ""
                     _list(status, my_tasks, todo_list, progress_list, done_list)
-                elif sys.argv[2] == "todo":
-                    status = sys.argv[2]
-                    _list(status, my_tasks, todo_list, progress_list, done_list)
-                elif sys.argv[2] == "in-progress":
-                    status = sys.argv[2]
-                    _list(status, my_tasks, todo_list, progress_list, done_list)
-            except IndexError:
-                status = ""
-                _list(status, my_tasks, todo_list, progress_list, done_list)
-
-        case _:
-            print("Invalid operation")
+            case _:
+                print("Invalid operation")
+                
+    except (IndexError, ValueError):
+        print("Error: enter a valid ID")
 
 else: 
     print("Please, enter a valid action")
